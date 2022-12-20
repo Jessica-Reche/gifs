@@ -1,14 +1,17 @@
+import './home.css';
 import { useState } from "react";
 import { Link, useLocation } from "wouter";
-
-
-
+import { useGifs } from "../../hooks/useGifs";
+import ListOfGifs from "../../components/ListOfGifs/ListOfGifs";
 const POPULAR_GIFS = ["Belugas", "Zorros", "Gatos"];
 
 const Home = () => {
     const [keyword, setKeyword] = useState('');
     const [path, pushLocation] = useLocation();
+    const  {loading, gifs} = useGifs();
 
+
+    //const {loading, gifs} = useGifs()
     const handleSubmit = evt =>{
         evt.preventDefault();
             //navegar a otra ruta
@@ -24,9 +27,10 @@ const Home = () => {
             <form onSubmit={handleSubmit}>
 
                 <input placeholder="Search a gif here..." onChange={handleChange} type="text" value={keyword} />
+                <button> Buscar</button>
             </form>
-            <h3 className="App-title">Los gifs más populares</h3>
-
+            <h3 className="App-title">ÚLtima búsqueda</h3>
+            <ListOfGifs gifs={gifs} />
             <ul>
                 {POPULAR_GIFS.map((gif) => (
                     <li key={gif}>
@@ -36,8 +40,6 @@ const Home = () => {
                     </li>
 
                 ))}
-
-
 
             </ul>
 

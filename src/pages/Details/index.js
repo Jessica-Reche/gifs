@@ -1,10 +1,22 @@
 
+import Gif from '../../components/Gif';
+import { useGlobalGifs } from '../../hooks/useGlobal';
+
+
 
 const Details = ({params}) => {
-    console.log(params.id)
+
+    const gifs = useGlobalGifs();
+    console.log({gifs});
+    const gif = gifs.find(singleGif => singleGif.id === params.id);
+    console.log({gif});
+
+
+
+
   return (
     
-    <h1>Gif con id</h1>
+    <Gif {...gif} />
   )
 }
 
